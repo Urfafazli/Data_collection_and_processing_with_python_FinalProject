@@ -6,11 +6,18 @@
 #Solution:
 
 
+import requests_with_caching
+import json
 
 
+def get_movie_data(title):
+    baseurl1 = 'http://www.omdbapi.com/'
+    param_dict1 = {}
+    param_dict1['t'] = title
+    param_dict1['r'] = 'json'
+    this_page_cache = requests_with_caching.get(baseurl1, params=param_dict1)
 
-
-
+    return json.loads(this_page_cache.text)
 
 def get_movie_rating(dct):
     rating = dct['Ratings']
